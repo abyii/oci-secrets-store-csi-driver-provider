@@ -10,7 +10,7 @@
 provider:
   # Provider image settings
   image:
-    repository: ghcr.io/abyii/oci-secrets-store-csi-driver-provider
+    repository: ghcr.io/abyii
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: v1.0.10
