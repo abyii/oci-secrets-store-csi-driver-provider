@@ -13,7 +13,7 @@ provider:
     repository: ghcr.io/abyii
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: v1.0.10
+    tag: v1.0.11
 
   # Provider container resources
   resources:
@@ -60,8 +60,8 @@ provider:
   # since the driver communicates with providers via sockets in this directory.
   socketHostDir: "/var/run/secrets-store-csi-providers"
 
-  # nodeSelector is the node selector for the provider daemonset
-  nodeSelector: {}
+  # nodeAffinity is the node affinity for the provider daemonset
+  nodeAffinity: {}
 
 # Secrets Store CSI Driver settings
 secrets-store-csi-driver:
