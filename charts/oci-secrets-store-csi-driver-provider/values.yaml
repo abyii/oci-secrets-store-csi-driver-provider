@@ -38,7 +38,7 @@ provider:
         workload:
           enabled: true
           resourcePrincipalVersion: "2.2"
-          resourcePrincipalRegion: "us-ashburn-1"
+          resourcePrincipalRegion: "ap-south-1"
 
 
   # socket endpoint for connections
