@@ -13,7 +13,7 @@ provider:
     repository: ghcr.io/abyii/oci-secrets-store-csi-driver-provider
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: v1.0.8
+    tag: v1.0.10
 
   # Provider container resources
   resources:
@@ -38,7 +38,7 @@ provider:
         workload:
           enabled: true
           resourcePrincipalVersion: "2.2"
-          resourcePrincipalRegion: "us-ashburn-1"
+          resourcePrincipalRegion: "ap-south-1"
 
 
   # socket endpoint for connections
