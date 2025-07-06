@@ -10,10 +10,10 @@
 provider:
   # Provider image settings
   image:
-    repository: ghcr.io/oracle/oci-secrets-store-csi-driver-provider
+    repository: ghcr.io/abyii/oci-secrets-store-csi-driver-provider
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: v0.4.2
+    tag: v1.0.8
 
   # Provider container resources
   resources:
@@ -59,6 +59,9 @@ provider:
   # Should match with the driver's value "linux.providersDir",
   # since the driver communicates with providers via sockets in this directory.
   socketHostDir: "/var/run/secrets-store-csi-providers"
+
+  # nodeSelector is the node selector for the provider daemonset
+  nodeSelector: {}
 
 # Secrets Store CSI Driver settings
 secrets-store-csi-driver:
