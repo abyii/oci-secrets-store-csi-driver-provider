@@ -60,6 +60,9 @@ provider:
   # since the driver communicates with providers via sockets in this directory.
   socketHostDir: "/var/run/secrets-store-csi-providers"
 
+  # nodeSelector is the node selector for the provider daemonset
+  nodeSelector: {}
+
 # Secrets Store CSI Driver settings
 secrets-store-csi-driver:
   # Determines whether to install or not the CSI Driver along with the provider
