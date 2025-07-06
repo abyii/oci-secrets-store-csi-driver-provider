@@ -162,6 +162,11 @@
         "profilingPort": {
           "description": "Profiling port",
           "type": "integer"
+        },
+        "nodeSelector": {
+          "description": "Node selector for the provider daemonset",
+          "type": "object",
+          "additionalProperties": true
         }
       },
       "required": [

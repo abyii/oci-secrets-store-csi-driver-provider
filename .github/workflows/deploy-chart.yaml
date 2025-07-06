@@ -1,0 +1,53 @@
+name: Deploy Helm Chart
+
+on:
+  push:
+    branches:
+      - main # Adjust this to your main branch name if different
+
+jobs:
+  charts-publish:
+    runs-on: ubuntu-latest
+    env:
+      HELM_CHARTS_REPO: https://abyii.github.io/oci-secrets-store-csi-driver-provider
+      PROVIDER_IMAGE_REPO: ghcr.io/abyii
+      PROVIDER_IMAGE_NEW_TAG: v1.0.10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: helm release
+        run: |
+          git checkout gh-pages
+          git checkout origin/main charts
+          sed -i -e 's|repository:.*|repository: ${{ env.PROVIDER_IMAGE_REPO }}|' \
+          -e 's|tag:.*|tag: ${{ env.PROVIDER_IMAGE_NEW_TAG }}|' \
+          charts/oci-secrets-store-csi-driver-provider/values.yaml
+          helm package charts/oci-secrets-store-csi-driver-provider -d charts
+          helm repo index --url ${{ env.HELM_CHARTS_REPO }}/charts --merge charts/index.yaml charts
+          git add charts
+          git commit -m "Releasing version: ${{ github.event.inputs.tag }}"
+          git push -u origin gh-pages
+
+      - name: verify published chart version
+        run: |
+          helm repo add oci-provider ${{ env.HELM_CHARTS_REPO }}/charts
+          helm repo update oci-provider
+          PUBLISHED_CHART_VERSION=`helm search repo oci-provider/oci-secrets-store-csi-driver-provider | grep ^oci | awk '{print $2}'`
+          LOCAL_CHART_VERSION=`grep "^version: " charts/oci-secrets-store-csi-driver-provider/Chart.yaml | sed -e "s/version: //"`
+          echo "PUBLISHED_CHART_VERSION=$PUBLISHED_CHART_VERSION"
+          echo "LOCAL_CHART_VERSION=$LOCAL_CHART_VERSION"
+          if [ "${PUBLISHED_CHART_VERSION}" != "${LOCAL_CHART_VERSION}" ];
+          then
+            echo "published version and local versions are not matching"
+            exit 1
+          else
+            echo "published version and local versions are matching"
+          fi
