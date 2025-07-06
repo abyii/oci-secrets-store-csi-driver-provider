@@ -45,14 +45,8 @@ test:
 build: cmd/server/main.go
 	go build -ldflags $(LDFLAGS) -mod vendor -o dist/provider ./cmd/server/main.go
 
-docker-build:
-	docker buildx build --platform=linux/amd64,linux/arm64 -t ${IMAGE_PATH} -f build/Dockerfile .
-
-docker-push:
-	docker push ${IMAGE_PATH}
-
 docker-build-push:
-	docker buildx build --platform=linux/amd64,linux/arm64 -t ${IMAGE_PATH} -f build/Dockerfile . --push
+	docker buildx build --push --platform=linux/amd64,linux/arm64 -t ${IMAGE_PATH} -f build/Dockerfile .   
 
 print-docker-image-path:
 	@echo ${IMAGE_PATH}
