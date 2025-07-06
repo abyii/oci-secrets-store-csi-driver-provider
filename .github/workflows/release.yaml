@@ -29,7 +29,7 @@ jobs:
       - name: Check IMAGE_REGISTRY
         run: echo "${IMAGE_REGISTRY}"
         env:
-          IMAGE_REGISTRY: ${{ vars.IMAGE_REGISTRY }}
+          IMAGE_REGISTRY: ghcr.io/abyii/oci-secrets-store-csi-driver-provider
 
       - name: Log into GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${GITHUB_ACTOR,,} --password-stdin
