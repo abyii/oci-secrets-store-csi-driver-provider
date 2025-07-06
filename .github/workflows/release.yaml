@@ -10,7 +10,7 @@ jobs:
   build:
     uses: ./.github/workflows/build-n-push.yaml
     with: 
-      IMAGE_REGISTRY: ghcr.io/abyii/oci-secrets-store-csi-driver-provider
+      IMAGE_REGISTRY: ghcr.io/abyii
     secrets: inherit
   image-publish:
     name: Tag image with release tag and push to repo
@@ -19,7 +19,7 @@ jobs:
     needs: ["build"]
     env:
       IMAGE_PATH: ${{ needs.build.outputs.IMAGE_PATH }}
-      IMAGE_REGISTRY: ghcr.io/abyii/oci-secrets-store-csi-driver-provider
+      IMAGE_REGISTRY: ghcr.io/abyii
     outputs:
       PROVIDER_IMAGE_REPO: ${{ env.PROVIDER_IMAGE_REPO }}
       PROVIDER_IMAGE_NEW_TAG: ${{ env.PROVIDER_IMAGE_NEW_TAG }}
@@ -28,7 +28,7 @@ jobs:
       - name: Check IMAGE_REGISTRY
         run: echo "${IMAGE_REGISTRY}"
         env:
-          IMAGE_REGISTRY: ghcr.io/abyii/oci-secrets-store-csi-driver-provider
+          IMAGE_REGISTRY: ghcr.io/abyii
 
       - name: Log into GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${GITHUB_ACTOR,,} --password-stdin
