@@ -19,16 +19,10 @@ jobs:
     needs: ["build"]
     env:
       IMAGE_PATH: ${{ needs.build.outputs.IMAGE_PATH }}
-      IMAGE_REGISTRY: ghcr.io/abyii
     outputs:
       PROVIDER_IMAGE_REPO: ${{ env.PROVIDER_IMAGE_REPO }}
       PROVIDER_IMAGE_NEW_TAG: ${{ env.PROVIDER_IMAGE_NEW_TAG }}
     steps:
-
-      - name: Check IMAGE_REGISTRY
-        run: echo "${IMAGE_REGISTRY}"
-        env:
-          IMAGE_REGISTRY: ghcr.io/abyii
 
       - name: Log into GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${GITHUB_ACTOR,,} --password-stdin
