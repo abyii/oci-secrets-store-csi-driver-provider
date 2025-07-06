@@ -11,7 +11,6 @@ jobs:
     uses: ./.github/workflows/build-n-push.yaml
     with: 
       IMAGE_REGISTRY: ghcr.io/abyii
-      HELM_CHARTS_REPO: https://abyii.github.io/oci-secrets-store-csi-driver-provider
     secrets: inherit
   image-publish:
     name: Tag image with release tag and push to repo
