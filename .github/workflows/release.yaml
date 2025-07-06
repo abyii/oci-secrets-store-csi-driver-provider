@@ -20,6 +20,7 @@ jobs:
     environment: actions
     env:
       IMAGE_PATH: ${{ needs.build.outputs.IMAGE_PATH }}
+      IMAGE_REGISTRY: ${{ vars.IMAGE_REGISTRY }}
     outputs:
       PROVIDER_IMAGE_REPO: ${{ env.PROVIDER_IMAGE_REPO }}
       PROVIDER_IMAGE_NEW_TAG: ${{ env.PROVIDER_IMAGE_NEW_TAG }}
