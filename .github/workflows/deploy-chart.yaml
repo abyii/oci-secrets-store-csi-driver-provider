@@ -11,7 +11,7 @@ jobs:
     env:
       HELM_CHARTS_REPO: https://abyii.github.io/oci-secrets-store-csi-driver-provider
       PROVIDER_IMAGE_REPO: ghcr.io/abyii
-      PROVIDER_IMAGE_NEW_TAG: v1.0.10
+      PROVIDER_IMAGE_NEW_TAG: v1.0.11
     steps:
       - name: Checkout
         uses: actions/checkout@v3.3.0

@@ -10,17 +10,17 @@ BUILD_VERSION=$(GIT_TAG)-$(BUILD_DATE)
 IMAGE_REPO_NAME=oci-secrets-store-csi-driver-provider
 
 ifeq "$(IMAGE_REGISTRY)" ""
-	IMAGE_REGISTRY  ?= ghcr.io/oracle-samples
+	IMAGE_REGISTRY  ?= ghcr.io/abyii
 else
 	IMAGE_REGISTRY	?= ${IMAGE_REGISTRY}
 endif
 
 # IMAGE_REPO=$(IMAGE_REGISTRY)/oci-secrets-store-csi-driver-provider
 IMAGE_URL=$(IMAGE_REGISTRY)/$(IMAGE_REPO_NAME)
-IMAGE_TAG=$(GIT_TAG)
+IMAGE_TAG=v1.0.11
 IMAGE_PATH=$(IMAGE_URL):$(IMAGE_TAG)
 
-LDFLAGS?="-X github.com/oracle-samples/oci-secrets-store-csi-driver-provider/internal/server.BuildVersion=$(BUILD_VERSION)"
+LDFLAGS?="-X github.com/abyii/oci-secrets-store-csi-driver-provider/internal/server.BuildVersion=$(BUILD_VERSION)"
 
 .PHONY : lint test build
 

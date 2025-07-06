@@ -72,7 +72,8 @@ spec:
         - name: socket-volume
           hostPath:
             path: "{{ .Values.provider.socketHostDir }}"
-      {{- with .Values.provider.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
+      {{- with .Values.provider.nodeAffinity }}
+      affinity:
+        nodeAffinity:
+          {{- toYaml . | nindent 10 }}
       {{- end }}         
